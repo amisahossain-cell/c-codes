@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+
+int insertion(int arr[], int n, int pos, int value) {
+    int i;
+
+    for(i = n; i > pos; i--) {
+        arr[i] = arr[i - 1];
+    }
+
+    arr[pos] = value;
+    n++;
+
+    return n;
+}
+
+int main() {
+    int arr[10] = {10, 20, 30, 40};
+    int n = 4;
+    int pos = 2;
+    int value = 4;
+    int i;
+
+    n = insertion(arr, n, pos, value);
+
+    printf("Element after insertion: ");
+
+    for(i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
