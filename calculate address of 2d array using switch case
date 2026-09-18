@@ -1,0 +1,51 @@
+#include<stdio.h>
+
+int main() {
+    int arr[3][3];
+    int i, j, choice;
+    int base, rows, cols, size;
+    int address;
+
+    printf("Enter number of rows: ");
+    scanf("%d", &rows);
+
+    printf("Enter number of columns: ");
+    scanf("%d", &cols);
+
+    printf("Enter size of each element (in bytes): ");
+    scanf("%d", &size);
+
+    printf("Enter base address: ");
+    scanf("%d", &base);
+
+    printf("\n1. Row Major Address");
+    printf("\n2. Column Major Address");
+    printf("\nEnter your choice: ");
+    scanf("%d", &choice);
+
+    printf("\nEnter row index: ");
+    scanf("%d", &i);
+
+    printf("Enter column index: ");
+    scanf("%d", &j);
+
+    switch (choice) {
+
+        case 1:
+            // Row Major
+            address = base + ((i * cols) + j) * size;
+            printf("Address = %d\n", address);
+            break;
+
+        case 2:
+            // Column Major
+            address = base + ((j * rows) + i) * size;
+            printf("Address = %d\n", address);
+            break;
+
+        default:
+            printf("Invalid choice\n");
+    }
+
+    return 0;
+}
