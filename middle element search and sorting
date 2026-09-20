@@ -1,0 +1,77 @@
+#include <stdio.h>
+#define SIZE 9
+#define CAPACITY 10
+
+void bubble(int a[], int l, int r)
+{
+    int i,j,t;
+    for(i=l;i<r;i++)
+        for(j=l;j<r-(i-l);j++)
+            if(a[j]<a[j+1])
+            {
+                t=a[j]; a[j]=a[j+1]; a[j+1]=t;
+            }
+}
+
+int partition(int a[],int l,int h)
+{
+    int p=a[h],i=l-1,j,t;
+    for(j=l;j<h;j++)
+        if(a[j]<=p)
+        {
+            i++;
+            t=a[i]; a[i]=a[j]; a[j]=t;
+        }
+    t=a[i+1]; a[i+1]=a[h]; a[h]=t;
+    return i+1;
+}
+
+void quick(int a[],int l,int h)
+{
+    if(l<h)
+    {
+        int p=partition(a,l,h);
+        quick(a,l,p-1);
+        quick(a,p+1,h);
+    }
+}
+
+void display(int a[],int n)
+{
+    int i;
+    for(i=0;i<n;i++) printf("%d ",a[i]);
+    printf("\n");
+}
+
+int main()
+{
+    int a[CAPACITY],n=SIZE,x,i,mid=SIZE/2;
+
+    printf("Enter 9 elements: ");
+    for(i=0;i<SIZE;i++) scanf("%d",&a[i]);
+
+    printf("Enter element: ");
+    scanf("%d",&x);
+
+    if(a[mid]==x)
+    {
+        printf("Found at index %d\n",mid);
+        bubble(a,0,mid-1);
+        quick(a,mid+1,n-1);
+    }
+    else
+    {
+        for(i=n;i>mid;i--)
+            a[i]=a[i-1];
+
+        a[mid]=x;
+        n++;
+
+        quick(a,0,n-1);
+    }
+
+    printf("Final array: ");
+    display(a,n);
+
+    return 0;
+}
