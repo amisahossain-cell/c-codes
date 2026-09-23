@@ -2,7 +2,7 @@
 
 int binary_Search(int arr[], int x, int low, int high) {
 
-    if (low <= high) {
+    if (high >= low) {
 
         int mid = low + (high - low) / 2;
 
