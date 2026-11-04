@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void insertMiddle(int value, int pos)
+{
+    struct node *newnode, *temp;
+    int i;
+
+    if(head == NULL)
+        return;
+
+    temp = head;
+
+    for(i = 1; i < pos && temp->next != head; i++)
+        temp = temp->next;
+
+    if(i != pos)
+    {
+        printf("Invalid position");
+        return;
+    }
+
+    newnode = malloc(sizeof(struct node));
+    newnode->data = value;
+
+    newnode->next = temp->next;
+    temp->next = newnode;
+}
+
+void display()
+{
+    struct node *temp = head;
+
+    if(head == NULL)
+        return;
+
+    do
+    {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while(temp != head);
+}
+
+int main()
+{
+    struct node *n1, *n2, *n3;
+
+    n1 = malloc(sizeof(struct node));
+    n2 = malloc(sizeof(struct node));
+    n3 = malloc(sizeof(struct node));
+
+    n1->data = 10;
+    n2->data = 20;
+    n3->data = 30;
+
+    n1->next = n2;
+    n2->next = n3;
+    n3->next = n1;
+
+    head = n1;
+
+    insertMiddle(25, 2);
+
+    display();
+    return 0;
+}
