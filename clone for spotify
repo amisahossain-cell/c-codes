@@ -1,0 +1,83 @@
+#include <stdio.h>
+
+char *songs[] = {
+    "Perfect",
+    "Shape of You",
+    "Believer",
+    "Memories",
+    "Closer"
+};
+
+int n = 5, current = 0;
+
+void display()
+{
+    int i;
+    printf("\n--- MY PLAYLIST ---\n");
+
+    for(i = 0; i < n; i++)
+        printf("%d. %s\n", i + 1, songs[i]);
+}
+
+void play()
+{
+    printf("\nNow Playing: %s\n", songs[current]);
+}
+
+void next()
+{
+    current = (current + 1) % n;
+    play();
+}
+
+void previous()
+{
+    current = (current - 1 + n) % n;
+    play();
+}
+
+int main()
+{
+    int choice;
+
+    while(1)
+    {
+        printf("\n===== SPOTIFY CLONE =====");
+        printf("\n1. Play Song");
+        printf("\n2. Next Song");
+        printf("\n3. Previous Song");
+        printf("\n4. Show Playlist");
+        printf("\n5. Exit");
+
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                play();
+                break;
+
+            case 2:
+                next();
+                break;
+
+            case 3:
+                previous();
+                break;
+
+            case 4:
+                display();
+                break;
+
+            case 5:
+                printf("Thank you for using Spotify Clone!");
+                return 0;
+
+            default:
+                printf("Invalid choice!");
+        }
+    }
+
+    return 0;
+}
