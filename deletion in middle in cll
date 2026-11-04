@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void deleteMiddle(int pos)
+{
+    struct node *temp, *del;
+    int i;
+
+    if(head == NULL || pos <= 1)
+        return;
+
+    temp = head;
+
+    for(i = 1; i < pos-1 && temp->next != head; i++)
+        temp = temp->next;
+
+    if(i != pos-1 || temp->next == head)
+    {
+        printf("Invalid position");
+        return;
+    }
+
+    del = temp->next;
+    temp->next = del->next;
+    free(del);
+}
+
+void display()
+{
+    struct node *temp = head;
+
+    if(head == NULL)
+        return;
+
+    do
+    {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    } while(temp != head);
+}
+
+int main()
+{
+    struct node *n1, *n2, *n3, *n4;
+
+    n1 = malloc(sizeof(struct node));
+    n2 = malloc(sizeof(struct node));
+    n3 = malloc(sizeof(struct node));
+    n4 = malloc(sizeof(struct node));
+
+    n1->data = 10; n1->next = n2;
+    n2->data = 20; n2->next = n3;
+    n3->data = 30; n3->next = n4;
+    n4->data = 40; n4->next = n1;
+
+    head = n1;
+
+    deleteMiddle(2);
+    display();
+
+    return 0;
+}
